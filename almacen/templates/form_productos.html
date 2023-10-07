@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>SysVentas</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-md-4">
+          <div class="card shadow">
+            <div class="card-header">
+              <h1>Productos</h1>
+            </div>
+            <div class="card-body">
+              <form action="" method="post">
+                {% csrf_token %}
+                  <p>{{form.as_p }}</p>
+                <input type="submit" value="Registrar" class="btn btn-success">
+              </form>
+              
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <table class="table table-striped shadow">
+            <thead class="bg-dark text-white">
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for producto in productos %}
+              <tr>
+                <td scope="row">{{ producto.id }}</td>
+                <td>{{ producto.name |capfirst }}</a>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.price }}</td>
+                {% if producto.status %}
+                <td><button class="btn btn-sm btn-success">Activo</button></td>
+                {% else %}
+                <td> <button class="btn btn-sm btn-danger">Inactivo</button></td>
+                {% endif %}
+                <td >{{ producto.category }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
